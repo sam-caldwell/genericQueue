@@ -12,10 +12,12 @@ func (list *Queue[T]) Pop() (data T) {
 	}
 
 	currentRecord := list.head
-	if currentRecord.nextPtr != nil {
-		//move head to next node.
-		list.head = currentRecord.nextPtr
+	if currentRecord.nextPtr == nil {
+		list.head = nil
 	}
+	//move head to next node.
+	list.head = currentRecord.nextPtr
+	currentRecord.nextPtr = nil
 
 	list.count-- // Decrement count
 
