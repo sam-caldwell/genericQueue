@@ -1,21 +1,21 @@
 package GenericQueue
 
 // Push - Add a new element to the tail-end of the GenericQueue
-func (list *Queue[T]) Push(data T) {
+func (queue *Queue[T]) Push(data T) {
 
-	list.lock.Lock()
-	defer list.lock.Unlock()
+	queue.lock.Lock()
+	defer queue.lock.Unlock()
 
 	newNode := &QueueNode[T]{data: data}
 
-	if list.tail == nil { // List is empty
-		list.head = newNode
-		list.tail = newNode
+	if queue.tail == nil { // List is empty
+		queue.head = newNode
+		queue.tail = newNode
 	} else {
-		list.tail.nextPtr = newNode
-		list.tail = newNode
+		queue.tail.nextPtr = newNode
+		queue.tail = newNode
 	}
 
-	list.count++
+	queue.count++
 
 }

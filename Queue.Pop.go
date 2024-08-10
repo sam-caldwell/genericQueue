@@ -1,25 +1,25 @@
 package GenericQueue
 
 // Pop - Remove and return the item at the head of the GenericQueue
-func (list *Queue[T]) Pop() (data T) {
+func (queue *Queue[T]) Pop() (data T) {
 
-	list.lock.Lock()
-	defer list.lock.Unlock()
+	queue.lock.Lock()
+	defer queue.lock.Unlock()
 
-	if list.head == nil {
+	if queue.head == nil {
 		var nothing T
 		return nothing
 	}
 
-	currentRecord := list.head
+	currentRecord := queue.head
 	if currentRecord.nextPtr == nil {
-		list.head = nil
+		queue.head = nil
 	}
 	//move head to next node.
-	list.head = currentRecord.nextPtr
+	queue.head = currentRecord.nextPtr
 	currentRecord.nextPtr = nil
 
-	list.count-- // Decrement count
+	queue.count-- // Decrement count
 
 	return currentRecord.data
 
