@@ -16,7 +16,6 @@ func (list *Queue[T]) Push(data T) {
 		list.tail = newNode
 	}
 
-	list.count++ // Increment count
-	list.sorted = false
+	list.count++
 
 }
