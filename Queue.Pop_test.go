@@ -23,26 +23,26 @@ func TestQueue_Pop(t *testing.T) {
 		if queue.count != 3 {
 			t.Fatal("count is wrong")
 		}
-		if value := queue.Pop(); value != 1 {
-			t.Fatal("value expect 1")
+		if value, err := queue.Pop(); value != 1 || err != nil {
+			t.Fatal("value expect 1, nil")
 		}
 		if queue.count != 2 {
 			t.Fatal("count is wrong")
 		}
-		if value := queue.Pop(); value != 2 {
-			t.Fatal("value expect 2")
+		if value, err := queue.Pop(); value != 2 || err != nil {
+			t.Fatal("value expect 2, nil")
 		}
 		if queue.count != 1 {
 			t.Fatal("count is wrong")
 		}
-		if value := queue.Pop(); value != 3 {
-			t.Fatal("value expect 3")
+		if value, err := queue.Pop(); value != 3 || err != nil {
+			t.Fatal("value expect 3, nil")
 		}
 		if queue.count != 0 {
 			t.Fatal("count is wrong")
 		}
-		if value := queue.Pop(); value != 0 {
-			t.Fatalf("value expect 0 got: %d", value)
+		if value, err := queue.Pop(); value != 0 || err == nil {
+			t.Fatal("value expect 0, 'queue empty' error")
 		}
 		if queue.count != 0 {
 			t.Fatal("count is wrong")
