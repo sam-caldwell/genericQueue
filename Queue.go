@@ -4,10 +4,11 @@ import (
 	"sync"
 )
 
+// Queue - A queue based on a linked list
 type Queue[T any] struct {
-	lock            sync.Mutex
-	head            *QueueNode[T]
-	tail            *QueueNode[T]
-	count           uint
-	compareElements func(T, T) int
+	lock        sync.Mutex
+	head        *QueueNode[T]
+	tail        *QueueNode[T]
+	count       uint
+	compareFunc func(T, T) int
 }
