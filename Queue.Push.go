@@ -1,4 +1,4 @@
-package GenericQueue
+package genericQueue
 
 // Push - Add a new element to the tail-end of the GenericQueue
 func (queue *Queue[T]) Push(data T) {

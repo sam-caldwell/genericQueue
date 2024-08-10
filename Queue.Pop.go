@@ -1,4 +1,4 @@
-package GenericQueue
+package genericQueue
 
 // Pop - Remove and return the item at the head of the GenericQueue
 func (queue *Queue[T]) Pop() (data T) {

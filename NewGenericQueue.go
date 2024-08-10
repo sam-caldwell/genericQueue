@@ -1,4 +1,4 @@
-package GenericQueue
+package genericQueue
 
 // NewGenericQueue - Generate and configure the initial state for a GenericQueue.Queue object
 func NewGenericQueue[T any](compareFunc func(T, T) int) *Queue[T] {

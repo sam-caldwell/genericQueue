@@ -1,4 +1,4 @@
-package GenericQueue
+package genericQueue
 
 const (
 	GreaterThan = 1

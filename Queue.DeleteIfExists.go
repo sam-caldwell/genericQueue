@@ -1,4 +1,4 @@
-package GenericQueue
+package genericQueue
 
 // DeleteIfExists - if a given claimedToken exists, return true and delete the item from the GenericQueue.
 func (queue *Queue[T]) DeleteIfExists(claimedToken T) bool {

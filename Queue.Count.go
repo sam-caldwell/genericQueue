@@ -1,4 +1,4 @@
-package GenericQueue
+package genericQueue
 
 // Count - return the number of elements currently in the GenericQueue
 func (queue *Queue[T]) Count() uint {

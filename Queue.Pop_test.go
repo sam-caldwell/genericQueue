@@ -1,4 +1,4 @@
-package GenericQueue
+package genericQueue
 
 import "testing"
 
