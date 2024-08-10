@@ -1,23 +1,39 @@
 package GenericQueue
 
 // DeleteIfExists - if a given claimedToken exists, return true and delete the item from the GenericQueue.
-func (list *Queue[T]) DeleteIfExists(claimedToken T, compareFunc func(a, b T) int) bool {
+func (queue *Queue[T]) DeleteIfExists(claimedToken T) bool {
+	queue.lock.Lock()
+	defer queue.lock.Unlock()
 
-	list.lock.Lock()
-	defer list.lock.Unlock()
+	if queue.compareFunc == nil {
+		panic("nil comparison function in GenericQueue")
+	}
+	if queue.head == nil {
+		return false
+	}
 
 	var prevRecord *QueueNode[T] = nil
-	for currentRecord := list.head; currentRecord.nextPtr != nil; currentRecord = currentRecord.nextPtr {
-		if compareFunc(currentRecord.data, claimedToken) == 0 {
-			prevRecord.nextPtr = currentRecord.nextPtr
+	currentRecord := queue.head
+	for currentRecord != nil {
+		if queue.compareFunc(currentRecord.data, claimedToken) == EqualTo {
+			if prevRecord == nil { // Deleting the head node
+				queue.head = currentRecord.nextPtr
+				if queue.head == nil { // Queue is now empty
+					queue.tail = nil
+				}
+			} else {
+				prevRecord.nextPtr = currentRecord.nextPtr
+				if currentRecord.nextPtr == nil { // Deleting the tail node
+					queue.tail = prevRecord
+				}
+			}
 			currentRecord.nextPtr = nil
-			currentRecord = nil
-			list.count--
+			queue.count--
 			return true
 		}
 		prevRecord = currentRecord
+		currentRecord = currentRecord.nextPtr
 	}
 
 	return false
-
 }
