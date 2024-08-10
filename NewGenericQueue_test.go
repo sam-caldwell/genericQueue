@@ -8,16 +8,16 @@ func TestNewGenericQueue(t *testing.T) {
 		queue.lock.Lock()
 		queue.lock.Unlock()
 		if queue.head != nil {
-			t.Fail()
+			t.Fatal("head should be nil")
 		}
 		if queue.tail != nil {
-			t.Fail()
+			t.Fatal("tail should be nil")
 		}
 		if queue.count != 0 {
-			t.Fail()
+			t.Fatal("count should be 0")
 		}
 		if queue.compareFunc != nil {
-			t.Fail()
+			t.Fatal("compareFunc should be nil")
 		}
 	})
 	t.Run("test with compareFunc", func(t *testing.T) {
@@ -33,16 +33,16 @@ func TestNewGenericQueue(t *testing.T) {
 		queue.lock.Lock()
 		queue.lock.Unlock()
 		if queue.head != nil {
-			t.Fail()
+			t.Fatal("head should be nil")
 		}
 		if queue.tail != nil {
-			t.Fail()
+			t.Fatal("tail should be nil")
 		}
 		if queue.count != 0 {
-			t.Fail()
+			t.Fatal("count should be 0")
 		}
-		if queue.compareFunc != nil {
-			t.Fail()
+		if queue.compareFunc == nil {
+			t.Fatal("compareFunc should be nil")
 		}
 	})
 }
